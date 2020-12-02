@@ -75,6 +75,10 @@ def get_psth_events(args):
                 currEdge = float(line)
                 edgeTimes = np.append(edgeTimes, currEdge)
                 line = inFile.readline()
+        # eliminate events closer than 0.9 seconds
+        edgeTimes = np.array(edgeTimes)
+        edgeTimes =  edgeTimes[np.append(5,[np.diff(edgeTimes)]) > 0.9]
+        edgeTimes = edgeTimes.tolist()
 
         # The output should be saved with the phy output, where the event viewer
         # plugin can read it
