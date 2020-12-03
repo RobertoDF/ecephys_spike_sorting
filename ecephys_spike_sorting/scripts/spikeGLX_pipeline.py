@@ -322,5 +322,9 @@ if move_binaries:
         bins_folder = os.path.join(npx_directory, run_folder_name)
         target = os.path.join(HDD_folder , run_folder_name)
         if os.path.isdir(target) is False:
-            shutil.move(bins_folder,target)
+
+            print('Moving binaries out of SSD')
+            # In windows use Robocopy, it´s better!
+            subprocess.call(["robocopy",bins_folder, target,"/e","/move", "/z"])
+
             print('Moving binaries out of SSD')
